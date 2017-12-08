@@ -21,7 +21,7 @@ class UpdateGame(Resource):
 
 class GenerateGame(Resource):
 
-    def get(self):
+    def get(self, level):
         return {
             'id': 1,
             'dimension': {},
@@ -30,7 +30,7 @@ class GenerateGame(Resource):
         }
 
 
-api.add_resource(GenerateGame, '/generate')
+api.add_resource(GenerateGame, '/generate/<level>')
 api.add_resource(UpdateGame, '/update/<id>')
 
 if __name__ == '__main__':

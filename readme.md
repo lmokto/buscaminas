@@ -10,13 +10,19 @@ API REST - flask python
 Cliente - JavaScript angular, jquery y CSS
 Base de datos - sqlite
 
+Nivel principiante: 8 × 8 casillas y 10 minas.
+Nivel intermedio: 16 × 16 casillas y 40 minas.
+Nivel experto: 16 × 30 casillas y 99 minas.
 
 1. ingreso y se dibuja el buscamina
+
+    get endpoint generate/beginner
+    get endpoint generate/intermediate
 
 	endpoint generate de buscamina con id
 		{
 			id: 1,
-			dimension: {'row':9 , 'clm':9 }
+			dimension: {'row':8 , 'clm':8}
 			mines: [
 				{ 'row': 1, 'clm:' [4] },
 				{ 'row': 2, 'clm:' [4, 5, 7] },
