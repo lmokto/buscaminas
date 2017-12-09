@@ -1,7 +1,11 @@
 cd buscaminas/api
 mkvirtualenv --python=python3.5 buscaminas
 pip install -r requirements.txt
+curl http://127.0.0.1:5000/generate/beginner
 
+cd buscaminas/client
+python -m SimpleHTTPServer
+http://127.0.0.1:8000/index.html
 
 """
 Analisis basico
@@ -35,6 +39,17 @@ Nivel experto: 16 × 30 casillas y 99 minas.
 				{ 'row': 9, 'clm:' [4, 5, 7] }
 			],
 			numbers: [
+				{ 'row': 1, 'clm:' [] },
+				{ 'row': 2, 'clm:' [] },
+				{ 'row': 3, 'clm:' [4, 5, 7] },
+				{ 'row': 4, 'clm:' [4, 5, 7] },
+				{ 'row': 5, 'clm:' [4, 5, 7] },
+				{ 'row': 6, 'clm:' [4, 5, 7] },
+				{ 'row': 7, 'clm:' [4, 5, 7] },
+				{ 'row': 8, 'clm:' [4, 5, 7] },
+				{ 'row': 9, 'clm:' [4, 5, 7] }
+			],
+			spaces: [
 				{ 'row': 1, 'clm:' [1,2,3,] },
 				{ 'row': 2, 'clm:' [4, 5, 7] },
 				{ 'row': 3, 'clm:' [4, 5, 7] },

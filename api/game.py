@@ -73,26 +73,86 @@ def assigned_mines(dimensions, mines_position):
 
 
 def random_mines(row, clm):
-    x = random.randrange(1, row+1)
-    y = random.randrange(1, clm+1)
+    x = random.randrange(1, row + 1)
+    y = random.randrange(1, clm + 1)
     return {'x': x, 'y': y}
 
 
+def check_min_max(v, min=1, max=9):
+    x, y = v[0], v[1]
+    min_max = list(range(min, max))
+    if x in min_max and y in min_max:
+        return x, y
+    return 0, 0
+
+
+def get_positions(dimensions, x, y, exclude=[]):
+    positions = {}
+    map_pos = {
+        'c': check_min_max([x, y]),  # center
+        'cr': check_min_max([x, y + 1]),  # center right dimensions.get(x).get(y + 1)
+        'cl': check_min_max([x, y - 1]),  # center left dimensions.get(x).get(y - 1)
+        'cu': check_min_max([x - 1, y]),  # center up dimensions.get(x - 1).get(y)
+        'cul': check_min_max([x - 1, y - 1]),  # center up left dimensions.get(x - 1).get(y - 1)
+        'cur': check_min_max([x - 1, y + 1]),  # center up right dimensions.get(x - 1).get(y + 1)
+        'cd': check_min_max([x + 1, y]),  # center down dimensions.get(x + 1).get(y)
+        'cdl': check_min_max([x + 1, y - 1]),  # center down left dimensions.get(x + 1).get(y - 1)
+        'cdr': check_min_max([x + 1, y + 1])  # center down right dimensions.get(x + 1).get(y + 1)
+    }
+    for k, v in map_pos.items():
+        if k not in exclude:
+            if v[0] != 0 and v[1] != 0:
+                positions.update({k: dimensions.get(v[0]).get(v[1])})
+            else:
+                positions.update({k: None})
+    return positions
+
+
+def mines_adjacent(dimensions, x, y):
+    sides = ['cdl', 'cul', 'cr', 'cl', 'cu', 'cur', 'cd', 'c', 'cdr']
+    center = dimensions.get(x).get(y)
+    mc = 0
+    if not center.get('mine') and center.get('number') == 0:
+        search_mines = get_positions(dimensions, x, y)
+        for k in sides:
+            if search_mines.get(k):
+                mc += 1 if search_mines.get(k).get('mine') else 0
+        center.update({'number': mc if mc >= 1 else 'space'})
+
+
 def assigned_numbers(dimensions):
-    pass
+    for x, v in dimensions.items():
+        if type(v) == dict:
+            for y, c in v.items():
+                mines_adjacent(dimensions, x, y)
 
 
-def assigned_space(dimensions):
-    pass
+def filter_by_key(buscaminas, **kwargs):
+    """
+    :param buscaminas:
+    :param kwargs: key="mines", equal=[True]
+    :return:
+    """
+    key = kwargs.get('key')
+    equal = kwargs.get('equal')
+    l = {}
+    for k, v in buscaminas.items():
+        l_clm = []
+        if type(k) == int:
+            for b in buscaminas.get(k):
+                if buscaminas.get(k).get(b).get(key) in equal:
+                    l_clm.append(b)
+            l.update({str(k): l_clm})
+    return l
 
 
-def generate_game(**kwargs):
+def generate_buscaminas(**kwargs):
     level = LEVELS.get(kwargs.get('level'))
     x = level.get('dimension').get('row')
     y = level.get('dimension').get('clm')
     mines = level.get('mines')
     dimensions = generate_dimensions(x, y)
-    mines_position = [random_mines(x, y) for _ in range(mines+1) if _]
+    mines_position = [random_mines(x, y) for _ in range(mines + 1) if _]
     assigned_mines(dimensions, mines_position)
-
+    assigned_numbers(dimensions)
     return dimensions
