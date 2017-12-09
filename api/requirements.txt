@@ -1,6 +1,7 @@
 aniso8601==1.3.0
 click==6.7
 Flask==0.12.2
+Flask-Cors==3.0.3
 Flask-RESTful==0.3.6
 itsdangerous==0.24
 Jinja2==2.10
@@ -9,4 +10,4 @@ python-dateutil==2.6.1
 pytz==2017.3
 six==1.11.0
 SQLAlchemy==1.1.15
-Werkzeug==0.12.2
+Werkzeug==0.13
