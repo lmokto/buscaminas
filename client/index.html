@@ -6,10 +6,10 @@
 <body>
 <div ng-app="app">
     <div ng-controller="buscaminaCtrl">
-        <h2>{{ title }}</h2>
+        <h2>{{ asd }}</h2>
         <table>
-            <tr>
-                <td></td>
+            <tr ng-repeat="(x, y) in data">
+                <td ng-repeat="a in y ">[{{ a }}]</td>
             </tr>
         </table>
     </div>

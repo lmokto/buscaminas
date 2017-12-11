@@ -130,18 +130,22 @@ def assigned_numbers(dimensions):
 def filter_by_key(buscaminas, **kwargs):
     """
     :param buscaminas:
-    :param kwargs: key="mines", equal=[True]
+    :param kwargs: key="mines", equal=[True], dict=True
     :return:
     """
     key = kwargs.get('key')
     equal = kwargs.get('equal')
+    dict = kwargs.get('dict', None)
     l = {}
     for k, v in buscaminas.items():
         l_clm = []
         if type(k) == int:
             for b in buscaminas.get(k):
                 if buscaminas.get(k).get(b).get(key) in equal:
-                    l_clm.append(b)
+                    if dict:
+                        l_clm.append({b: buscaminas.get(k).get(b).get(key)})
+                    else:
+                        l_clm.append(b)
             l.update({str(k): l_clm})
     return l
 

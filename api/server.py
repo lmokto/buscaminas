@@ -29,7 +29,7 @@ class GenerateGame(Resource):
         return filter_by_key(game, key="mine", equal=[True])
 
     def get_numbers(self, game):
-        return filter_by_key(game, key="number", equal=list(range(1, 9)))
+        return filter_by_key(game, key="number", equal=list(range(1, 9)), dict=True)
 
     def get_spaces(self, game):
         return filter_by_key(game, key="number", equal=['space'])
