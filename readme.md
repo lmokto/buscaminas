@@ -1,13 +1,15 @@
+Iniciar API Rest
+
 cd buscaminas/api
 mkvirtualenv --python=python3.5 buscaminas
 pip install -r requirements.txt
 curl http://127.0.0.1:5000/generate/beginner
 
+Iniciar Cliente Web
 cd buscaminas/client
 python -m SimpleHTTPServer
 http://127.0.0.1:8000/index.html
 
-"""
 Analisis basico
 
 API REST - flask python
@@ -25,41 +27,53 @@ Nivel experto: 16 × 30 casillas y 99 minas.
 
 	endpoint generate de buscamina con id
 		{
+			dimension: {
+				clm: 8,
+				row: 8
+			},
 			id: 1,
-			dimension: {'row':8 , 'clm':8}
-			mines: [
-				{ 'row': 1, 'clm:' [4] },
-				{ 'row': 2, 'clm:' [4, 5, 7] },
-				{ 'row': 3, 'clm:' [4, 5, 7] },
-				{ 'row': 4, 'clm:' [4, 5, 7] },
-				{ 'row': 5, 'clm:' [4, 5, 7] },
-				{ 'row': 6, 'clm:' [4, 5, 7] },
-				{ 'row': 7, 'clm:' [4, 5, 7] },
-				{ 'row': 8, 'clm:' [4, 5, 7] },
-				{ 'row': 9, 'clm:' [4, 5, 7] }
-			],
-			numbers: [
-				{ 'row': 1, 'clm:' [] },
-				{ 'row': 2, 'clm:' [] },
-				{ 'row': 3, 'clm:' [4, 5, 7] },
-				{ 'row': 4, 'clm:' [4, 5, 7] },
-				{ 'row': 5, 'clm:' [4, 5, 7] },
-				{ 'row': 6, 'clm:' [4, 5, 7] },
-				{ 'row': 7, 'clm:' [4, 5, 7] },
-				{ 'row': 8, 'clm:' [4, 5, 7] },
-				{ 'row': 9, 'clm:' [4, 5, 7] }
-			],
-			spaces: [
-				{ 'row': 1, 'clm:' [1,2,3,] },
-				{ 'row': 2, 'clm:' [4, 5, 7] },
-				{ 'row': 3, 'clm:' [4, 5, 7] },
-				{ 'row': 4, 'clm:' [4, 5, 7] },
-				{ 'row': 5, 'clm:' [4, 5, 7] },
-				{ 'row': 6, 'clm:' [4, 5, 7] },
-				{ 'row': 7, 'clm:' [4, 5, 7] },
-				{ 'row': 8, 'clm:' [4, 5, 7] },
-				{ 'row': 9, 'clm:' [4, 5, 7] }
-			]
+			mines: {
+				1: [{
+					1:true,
+					...,
+					...
+				}],
+				2: [],
+				3: [],
+				4: [],
+				5: [],
+				6: [],
+				7: [],
+				8: []
+			},
+			numbers: {
+				1: [{
+					2:1,
+					...,
+					...
+				}],
+				2: [],
+				3: [],
+				4: [],
+				5: [],
+				6: [],
+				7: [],
+				8: []
+			},
+			spaces: {
+				1: [{
+					3:'space',
+					...,
+					...
+				}],
+				2: [],
+				3: [],
+				4: [],
+				5: [],
+				6: [],
+				7: [],
+				8: []
+			}
 		}
 
 	endpoint tiempo de la partida con id del buscamina
@@ -75,7 +89,3 @@ Nivel experto: 16 × 30 casillas y 99 minas.
 
 4. tengo un resultado , ganar o perder, (finaliza el tiempo del juego)
 	actualizo endpoint (id buscamina, inicio, fin)
-
-"""
-
-

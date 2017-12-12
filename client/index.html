@@ -1,15 +1,23 @@
 <html><html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
 <div ng-app="app">
     <div ng-controller="buscaminaCtrl">
-        <h2>{{ asd }}</h2>
+        <h2>{{ title }}</h2>
+        <h3 ng-if="start_game">start time {{ start_game }}</h3>
+        <h3 ng-if="end_game">end time {{ end_game }}</h3>
         <table>
             <tr ng-repeat="(x, y) in data">
-                <td ng-repeat="a in y ">[{{ a }}]</td>
+                <td>[ {{ x }} ] </td>
+                <td ng-repeat="(a, b) in y">
+                    <span ng-if="b.mine == true" ng-click="changeValue(b.mine, 'mine', $event)" ng-right-click="setFlagSign(b.mine, 'mine', $event)"> [__] </span>
+                    <span ng-if="b.number" ng-click="changeValue(b.number, 'number', $event)" ng-right-click="setFlagSign(b.mine, 'mine', $event)"> [__] </span>
+                    <span ng-if="b.space == true" ng-click="changeValue(b.space, 'space', $event)" ng-right-click="setFlagSign(b.mine, 'mine', $event)"> [__] </span>
+                </td>
             </tr>
         </table>
     </div>

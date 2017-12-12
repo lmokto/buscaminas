@@ -12,27 +12,50 @@ api = Api(app)
 parser = reqparse.RequestParser()
 parser.add_argument('task')
 
+# engine = create_engine('sqlite:///buscaminas.db')
+
 
 class UpdateGame(Resource):
     def get(self, id):
-        pass
+        """
+            paso a id y me devuelve el tiempo que tardo esa partida
+        """
+        return {
+            'id': '',
+            'start': '',
+            'end': ''
+        }
 
     def put(self, id):
-        pass
+        """
+            paso a id y actualizo el tiempo de finalizacion de esa partida
+        """
+        return {
+            'id': '',
+            'start': '',
+            'end': ''
+        }
 
-    def post(self):
-        pass
+    def post(self, id):
+        """
+            paso a id y inicio el tiempo de una partida
+        """
+        return {
+            'id': '',
+            'start': '',
+            'end': ''
+        }
 
 
 class GenerateGame(Resource):
     def get_mines(self, game):
-        return filter_by_key(game, key="mine", equal=[True])
+        return filter_by_key(game, key="mine", equal=[True], dict=True)
 
     def get_numbers(self, game):
         return filter_by_key(game, key="number", equal=list(range(1, 9)), dict=True)
 
     def get_spaces(self, game):
-        return filter_by_key(game, key="number", equal=['space'])
+        return filter_by_key(game, key="number", equal=['space'], dict=True)
 
     def schema_api(self, game):
         return {
@@ -55,7 +78,7 @@ class GenerateGame(Resource):
 
 
 api.add_resource(GenerateGame, '/api/generate/<level>')
-#api.add_resource(UpdateGame, '/update/<id>')
+api.add_resource(UpdateGame, '/api/timestamp/<id>')
 
 if __name__ == '__main__':
     app.run(debug=True)
