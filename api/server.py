@@ -12,9 +12,6 @@ api = Api(app)
 parser = reqparse.RequestParser()
 parser.add_argument('task')
 
-# engine = create_engine('sqlite:///buscaminas.db')
-
-
 class UpdateGame(Resource):
     def get(self, id):
         """
